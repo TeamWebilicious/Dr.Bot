@@ -15,9 +15,13 @@
       </v-app-bar>
 
       <div id="body">
-        <div id="chat-wrap" v-for="message in messages" :key="message.id">
-          <div class="bot chat" v-if="bot">{{ message.text }}</div>
-          <div class="user chat" v-else>{{ message.text }}</div>
+        <div v-for="message in messages" :key="message.id">
+          <div v-if="message.bot" class="chat-wrap bot-wrap">
+            <div class="bot chat">{{ message.text }}</div>
+          </div>
+          <div v-else class="chat-wrap user-wrap">
+            <div class="user chat">{{ message.text }}</div>
+          </div>
         </div>
       </div>
 
@@ -31,8 +35,9 @@
           placeholder="type something..."
           filled
           dense
+          append-outer-icon="mdi-send"
         ></v-text-field>
-        <v-btn><v-icon>mdi-minus</v-icon></v-btn>
+        <!-- <v-btn><v-icon>mdi-minus</v-icon></v-btn> -->
       </div>
     </v-card>
   </section>
@@ -44,8 +49,10 @@ export default {
   data() {
     return {
       messages: [
-        { id: 2, text: "sfs", bot: true },
-        { id: 2, text: "sfs", bot: true },
+        { id: 1, text: "Hey!", bot: true },
+        { id: 2, text: "sfs", bot: false },
+        { id: 1, text: "Hey!", bot: true },
+        { id: 2, text: "sfs", bot: false },
       ],
       optionsFlag: true,
       options: [
@@ -95,31 +102,57 @@ export default {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-#chat-wrap {
+.chat-wrap {
   width: 100%;
   height: auto;
-  padding: 10px;
-  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  // margin-bottom: 5px;
   border-radius: 3%;
+}
+
+.bot-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.user-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
 }
 
 .chat {
   height: auto;
-  max-width: 30px;
-  padding: 10px;
-  margin: 10px;
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  margin: 5px;
   border-radius: 3%;
   background: #f0f0f3;
   box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
 }
 .user {
+  justify-content: flex-end;
+  align-items: center;
   background: #f0f0f3;
+  // max-width: 50%;
   box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
 }
 .bot {
+  justify-content: flex-start;
+  align-items: center;
   background: #f0f0f3;
+  max-width: 50%;
   box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
 }
