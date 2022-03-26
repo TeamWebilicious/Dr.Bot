@@ -26,9 +26,13 @@
       </div>
 
       <div id="options" v-if="optionsFlag">
-        <v-chip v-for="option in options" :key="option.id" class="ml-1">{{
-          option.text
-        }}</v-chip>
+        <v-chip
+          v-for="option in options"
+          :key="option.id"
+          class="ml-1"
+          @click="userOptionFn(option)"
+          >{{ option.text }}</v-chip
+        >
       </div>
       <div id="foot">
         <v-text-field
@@ -36,6 +40,7 @@
           filled
           dense
           append-outer-icon="mdi-send"
+          v-model="userMsg"
         ></v-text-field>
         <!-- <v-btn><v-icon>mdi-minus</v-icon></v-btn> -->
       </div>
@@ -48,11 +53,13 @@ export default {
   props: ["showChatWindow"],
   data() {
     return {
+      userMsg: null,
+      userOption: null,
       messages: [
         { id: 1, text: "Hey!", bot: true },
         { id: 2, text: "sfs", bot: false },
-        { id: 1, text: "Hey!", bot: true },
-        { id: 2, text: "sfs", bot: false },
+        { id: 3, text: "Hey!", bot: true },
+        { id: 4, text: "sfs", bot: false },
       ],
       optionsFlag: true,
       options: [
@@ -60,6 +67,27 @@ export default {
         { id: 2, text: "I need a Doctor" },
       ],
     };
+  },
+  methods: {
+    newTypemsg() {
+      this.messages.push({
+        id: this.messages.length + 1,
+        text: this.userMsg,
+        bot: false,
+      });
+      this.userMsg = null;
+    },
+
+    userOptionFn(selectedOption) {
+      this.userOption = selectedOption.id;
+      this.optionsFlag = false;
+      console.log("userOption", this.userOption);
+      this.messages.push({
+        id: this.messages.length + 1,
+        text: selectedOption.text,
+        bot: false,
+      });
+    },
   },
 };
 </script>
