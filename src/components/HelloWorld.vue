@@ -1,26 +1,31 @@
 <template>
-    <div class="center con-avatars">
-      <vs-avatar size="30">
-        <template #text>
-          Lily
-        </template>
-      </vs-avatar>
-      <vs-avatar size="40">
-        <template #text>
-          Evan You
-        </template>
-      </vs-avatar>
-      <vs-avatar>
-          <i class='bx bx-user'></i>
-      </vs-avatar>
-      <vs-avatar size="60" primary badge badge-color="danger">
-          <i class='bx bxs-hot' ></i>
-      </vs-avatar>
-      <vs-avatar size="70" badge badge-color="success">
-        <img src="/avatars/avatar-4.png" alt="">
-      </vs-avatar>
+    <div class="center">
+      <vs-button
+        flat
+        :active="active == 0"
+        @click="active = 0"
+      >
+        Active
+      </vs-button>
+      <vs-button
+        flat
+        :active="active == 1"
+        @click="active = 1"
+      >
+        Default
+      </vs-button>
+      <vs-button
+        flat
+        disabled
+      >
+        Disabled
+      </vs-button>
     </div>
   </template>
-<script>
-
-</script>
+  <script>
+    export default {
+      data:() => ({
+        active: 0
+      })
+    }
+  </script>
