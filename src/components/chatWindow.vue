@@ -41,6 +41,8 @@
           dense
           append-outer-icon="mdi-send"
           v-model="userMsg"
+          @keyup.enter="sendTypeMessage"
+          @click:append-outer="sendTypeMessage"
         ></v-text-field>
         <!-- <v-btn><v-icon>mdi-minus</v-icon></v-btn> -->
       </div>
@@ -69,12 +71,14 @@ export default {
     };
   },
   methods: {
-    newTypemsg() {
-      this.messages.push({
-        id: this.messages.length + 1,
-        text: this.userMsg,
-        bot: false,
-      });
+    sendTypeMessage() {
+      if (this.userMsg !== null && this.userMsg != "") {
+        this.messages.push({
+          id: this.messages.length + 1,
+          text: this.userMsg,
+          bot: false,
+        });
+      }
       this.userMsg = null;
     },
 
