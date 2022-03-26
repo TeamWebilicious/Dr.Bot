@@ -99,16 +99,26 @@ export default {
   width: 100%;
   height: auto;
   padding: 10px;
-  margin: 10px;
+  margin-bottom: 5px;
   border-radius: 3%;
 }
 
 .chat {
-  width: 100%;
   height: auto;
+  max-width: 30px;
   padding: 10px;
   margin: 10px;
   border-radius: 3%;
+  background: #f0f0f3;
+  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
+    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+}
+.user {
+  background: #f0f0f3;
+  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
+    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+}
+.bot {
   background: #f0f0f3;
   box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
