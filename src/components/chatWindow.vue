@@ -1,0 +1,131 @@
+<template>
+  <section id="chat-window-wrap" v-if="showChatWindow">
+    <v-card id="chat-window">
+      <v-app-bar color="deep-purple accent-4" id="appbar" dense dark>
+        <v-avatar class="mr-3">
+          <img
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            alt="John"
+            width="10px"
+          />
+        </v-avatar>
+        <v-toolbar-title>Dr Bot</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+      </v-app-bar>
+
+      <div id="body">
+        <div id="chat-wrap" v-for="message in messages" :key="message.id">
+          <div class="bot chat" v-if="bot">{{ message.text }}</div>
+          <div class="user chat" v-else>{{ message.text }}</div>
+        </div>
+      </div>
+
+      <div id="options" v-if="optionsFlag">
+        <v-chip v-for="option in options" :key="option.id" class="ml-1">{{
+          option.text
+        }}</v-chip>
+      </div>
+      <div id="foot">
+        <v-text-field
+          placeholder="type something..."
+          filled
+          dense
+        ></v-text-field>
+        <v-btn><v-icon>mdi-minus</v-icon></v-btn>
+      </div>
+    </v-card>
+  </section>
+</template>
+
+<script>
+export default {
+  props: ["showChatWindow"],
+  data() {
+    return {
+      messages: [
+        { id: 2, text: "sfs", bot: true },
+        { id: 2, text: "sfs", bot: true },
+      ],
+      optionsFlag: true,
+      options: [
+        { id: 1, text: "I am not feeling well" },
+        { id: 2, text: "I need a Doctor" },
+      ],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+#chat-window-wrap {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #e5e5e5;
+}
+#chat-window {
+  width: 60%;
+  min-width: 300px;
+  max-width: 450px;
+  border-radius: 3%;
+  height: 90vh;
+  background: #f0f0f3;
+  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
+    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+}
+#appbar {
+  border-radius: 3%;
+}
+#body {
+  height: 70%;
+  overflow-y: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+#body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+#chat-wrap {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 3%;
+}
+
+.chat {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 3%;
+  background: #f0f0f3;
+  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
+    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+}
+#options {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 10%;
+  padding: 10px;
+}
+#foot {
+  padding: 10px;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

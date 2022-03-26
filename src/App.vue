@@ -1,19 +1,19 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld/>
+      <chatWindow :showChatWindow="true" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import chatWindow from "./components/chatWindow";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
+    chatWindow,
   },
 
   data: () => ({
@@ -23,5 +23,4 @@ export default {
 </script>
 
 <style >
-
 </style>
