@@ -13,7 +13,9 @@
           </div>
           <div class="nav-buttons">
             <a href="#" class="log-in"> </a>
-            <a href="#" class="sign-up btn btn-sm">Launch Now</a>
+            <a href="#" class="sign-up btn btn-sm" @click="launchPopup"
+              >Launch Now</a
+            >
           </div>
         </nav>
         <div class="burger-menu">
@@ -26,7 +28,7 @@
       <div class="landing-text">
         <h1>Hello, I'am Dr.Bot</h1>
         <p>Your personal health assistant.</p>
-        <a href="#url-shorten-form" class="btn btn-lg">Launch now</a>
+        <a @click="launchPopup" class="btn btn-lg">Launch now</a>
       </div>
       <div class="landing-image">
         <img
@@ -36,14 +38,39 @@
         />
       </div>
     </section>
+    <!-- Features -->
+    <v-dialog v-if="dialog" class="chatpopup" v-model="dialog" width="500">
+      <chatWindow :showChatWindow="true" />
+    </v-dialog>
   </main>
 </template>
 
 <script>
-export default {};
+import chatWindow from "./chatWindow.vue";
+export default {
+  name: "helloWorld",
+  components: {
+    chatWindow,
+  },
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+  methods: {
+    launchPopup() {
+      this.dialog = true;
+      console.log("launchPopup", this.dialog);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+.chatpopup {
+  width: 70vw;
+  height: 70vh;
+}
 .landing-text {
   margin-bottom: 80px;
 }
