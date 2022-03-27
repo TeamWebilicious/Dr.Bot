@@ -39,12 +39,12 @@
       </div>
     </section>
     <!-- Features -->
-    <v-dialog v-model="dialog">
-      <chatWindow v-if="dialog" class="chat-win" :showChatWindow="true" />
-      <v-btn class="mx-2" small fab depressed @click="close">
-        <v-icon dark> mdi-close </v-icon>
+
+    <chatWindow v-if="cw" class="chat-win" :showChatWindow="true">
+      <v-btn class="mx-2" color="red" small depressed @click="close">
+        <v-icon color="white" dark> mdi-close </v-icon>
       </v-btn>
-    </v-dialog>
+    </chatWindow>
   </main>
 </template>
 
@@ -57,17 +57,17 @@ export default {
   },
   data() {
     return {
-      dialog: false,
+      cw: false,
     };
   },
   methods: {
     close() {
-      this.dialog = false;
-      console.log("Enter Dashboard", this.dialog);
+      this.cw = false;
+      console.log("Enter Dashboard", this.cw);
     },
     launchPopup() {
-      this.dialog = true;
-      console.log("launchPopup", this.dialog);
+      this.cw = true;
+      console.log("launchPopup", this.cw);
     },
   },
 };
@@ -136,7 +136,6 @@ main {
 .chat-win {
   position: absolute;
   top: 0;
-
   left: 0;
   z-index: 999;
 }

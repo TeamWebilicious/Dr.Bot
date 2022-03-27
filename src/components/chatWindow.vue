@@ -1,6 +1,6 @@
 <template>
   <section id="chat-window-wrap" v-if="showChatWindow">
-    <v-card id="chat-window">
+    <v-card id="chat-window" class="pa-2">
       <v-app-bar color="#4285F4" id="appbar" dense dark>
         <v-badge bottom color="green accent-4" dot offset-x="10" offset-y="10">
           <v-avatar size="40">
@@ -18,6 +18,7 @@
         </v-btn> -->
 
         <v-spacer></v-spacer>
+        <slot> </slot>
       </v-app-bar>
 
       <div id="body">
@@ -31,6 +32,20 @@
             <div class="user chat">{{ message.text }}</div>
           </div>
         </div>
+        <!-- Doctor Card -->
+        <!-- <div class="doctorCard">
+          <div class="top">
+            <div class="left">
+              <v-avatar size="40">
+                <v-icon color="white accent-4">1</v-icon>
+              </v-avatar>
+            </div>
+            <div class="right">
+              <div class="name">Dr. Bot</div>
+              <div class="status">Active</div>
+            </div>
+          </div>
+        </div> -->
       </div>
 
       <div id="options" class="text-center" v-if="optionsFlag">
@@ -43,7 +58,7 @@
           >{{ option.text }}</v-chip
         >
       </div>
-      <div id="foot" class="md-0">
+      <div id="foot" class="md-1">
         <v-text-field
           class="md-0 pa-0"
           placeholder="Type something..."
@@ -52,9 +67,7 @@
           append-outer-icon="mdi-send"
           v-model="userMsg"
           @keyup.enter="sendTypeMessage"
-          @click:append-outer="sendTypeMessage"
         ></v-text-field>
-        <!-- <v-btn><v-icon>mdi-minus</v-icon></v-btn> -->
       </div>
     </v-card>
   </section>
@@ -67,7 +80,6 @@ export default {
   props: ["showChatWindow"],
   data() {
     return {
-      dialog: false,
       userMsg: null,
       userOption: null,
       messages: [
@@ -108,16 +120,16 @@ export default {
   width: 100vw;
   height: 100vh;
   background-color: rgba($color: #000000, $alpha: 0.3);
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e5e5e5;
 }
 #chat-window {
   width: 60%;
   min-width: 300px;
   max-width: 450px;
-  border-radius: 3%;
+  border-radius: 10px;
   height: 90vh;
   background: #fcfcfc;
 }
