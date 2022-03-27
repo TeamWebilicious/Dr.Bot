@@ -1,15 +1,16 @@
 <template>
   <section id="chat-window-wrap" v-if="showChatWindow">
     <v-card id="chat-window">
-      <v-app-bar color="deep-purple accent-4" id="appbar" dense dark>
-        <v-avatar class="mr-3">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="John"
-            width="10px"
-          />
-        </v-avatar>
-        <v-toolbar-title>Dr Bot</v-toolbar-title>
+      <v-app-bar color="#4285F4" id="appbar" dense dark>
+        <v-badge bottom color="green accent-4" dot offset-x="10" offset-y="10">
+          <v-avatar size="40">
+            <v-icon color="white accent-4">mdi-robot-outline</v-icon>
+          </v-avatar>
+        </v-badge>
+        <div class="ml-2">
+          <p class="white--text ma-0 pa-0 botTitle">Dr Bot</p>
+          <p class="grey--text ma-0 pa-0 botStatus">Active</p>
+        </div>
 
         <v-spacer></v-spacer>
       </v-app-bar>
@@ -34,8 +35,9 @@
           >{{ option.text }}</v-chip
         >
       </div>
-      <div id="foot">
+      <div id="foot" class="md-0">
         <v-text-field
+          class="md-0 pa-0"
           placeholder="type something..."
           filled
           dense
@@ -133,6 +135,14 @@ export default {
 #body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.botStatus {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.botTitle {
+  font-size: 14px;
+  color: #8c8c8c;
 }
 .chat-wrap {
   width: 100%;
