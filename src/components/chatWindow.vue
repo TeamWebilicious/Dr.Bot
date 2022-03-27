@@ -11,6 +11,11 @@
           <p class="white--text ma-0 pa-0 botTitle">Dr Bot</p>
           <p class="white--text ma-0 pa-0 botStatus">Active</p>
         </div>
+        <v-spacer></v-spacer>
+
+        <!-- <v-btn class="mx-2" small fab depressed @click="close">
+          <v-icon dark> mdi-close </v-icon>
+        </v-btn> -->
 
         <v-spacer></v-spacer>
       </v-app-bar>
@@ -56,10 +61,13 @@
 </template>
 
 <script>
+import msgService from "./../service.js";
+
 export default {
   props: ["showChatWindow"],
   data() {
     return {
+      dialog: false,
       userMsg: null,
       userOption: null,
       messages: [
@@ -77,25 +85,18 @@ export default {
     };
   },
   methods: {
-    sendTypeMessage() {
-      if (this.userMsg !== null && this.userMsg != "") {
-        this.messages.push({
-          id: this.messages.length + 1,
-          text: this.userMsg,
-          bot: false,
-        });
-      }
-      this.userMsg = null;
-    },
-
-    userOptionFn(selectedOption) {
-      this.userOption = selectedOption.id;
-      this.optionsFlag = false;
-      console.log("userOption", this.userOption);
+    async sendMessage(message) {
       this.messages.push({
         id: this.messages.length + 1,
-        text: selectedOption.text,
+        text: message,
         bot: false,
+      });
+      await msgService.sendMessage(message).then((response) => {
+        this.messages.push({
+          id: this.messages.length + 1,
+          text: response.data.message,
+          bot: true,
+        });
       });
     },
   },
@@ -118,9 +119,7 @@ export default {
   max-width: 450px;
   border-radius: 3%;
   height: 90vh;
-  background: #f0f0f3;
-  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
-    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+  background: #fcfcfc;
 }
 #appbar {
   border-radius: 3%;
