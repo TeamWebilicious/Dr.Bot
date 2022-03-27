@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@lottiefiles/vue-lottie-player": "^1.0.5",
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "firebase": "^8.4.3",
     "vue": "^2.6.14",
