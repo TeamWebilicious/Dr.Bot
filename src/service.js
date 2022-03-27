@@ -2,9 +2,9 @@ import {
     // db,
     // auth,
     functions
-} from "../firebase";
+} from "./firebase";
 
-export const orderService = {
+export const msgService = {
     msgBot
 };
 

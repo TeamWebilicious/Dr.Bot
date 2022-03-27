@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import msgService from "./../service.js";
+
 export default {
   props: ["showChatWindow"],
   data() {
@@ -79,29 +81,18 @@ export default {
     };
   },
   methods: {
-    close() {
-      this.dialog = false;
-      console.log("Enter Dashboard", this.dialog);
-    },
-    sendTypeMessage() {
-      if (this.userMsg !== null && this.userMsg != "") {
-        this.messages.push({
-          id: this.messages.length + 1,
-          text: this.userMsg,
-          bot: false,
-        });
-      }
-      this.userMsg = null;
-    },
-
-    userOptionFn(selectedOption) {
-      this.userOption = selectedOption.id;
-      this.optionsFlag = false;
-      console.log("userOption", this.userOption);
+    async sendMessage(message) {
       this.messages.push({
         id: this.messages.length + 1,
-        text: selectedOption.text,
+        text: message,
         bot: false,
+      });
+      await msgService.sendMessage(message).then((response) => {
+        this.messages.push({
+          id: this.messages.length + 1,
+          text: response.data.message,
+          bot: true,
+        });
       });
     },
   },
