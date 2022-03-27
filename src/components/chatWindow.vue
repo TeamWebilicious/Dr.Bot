@@ -9,7 +9,7 @@
         </v-badge>
         <div class="ml-2">
           <p class="white--text ma-0 pa-0 botTitle">Dr Bot</p>
-          <p class="grey--text ma-0 pa-0 botStatus">Active</p>
+          <p class="white--text ma-0 pa-0 botStatus">Active</p>
         </div>
         <v-spacer></v-spacer>
 
@@ -23,7 +23,9 @@
       <div id="body">
         <div v-for="message in messages" :key="message.id">
           <div v-if="message.bot" class="chat-wrap bot-wrap">
-            <div class="bot chat">{{ message.text }}</div>
+            <div class="bot chat">
+              {{ message.text }}
+            </div>
           </div>
           <div v-else class="chat-wrap user-wrap">
             <div class="user chat">{{ message.text }}</div>
@@ -39,7 +41,7 @@
       <div id="foot" class="md-0">
         <v-text-field
           class="md-0 pa-0"
-          placeholder="type something..."
+          placeholder="Type something..."
           filled
           dense
           append-outer-icon="mdi-send"
@@ -65,14 +67,15 @@ export default {
       userOption: null,
       messages: [
         { id: 1, text: "Hey!", bot: true },
-        { id: 2, text: "sfs", bot: false },
+        { id: 2, text: "I need an ", bot: false },
         { id: 3, text: "Hey!", bot: true },
-        { id: 4, text: "sfs", bot: false },
+        { id: 4, text: "I am upset with headache", bot: false },
       ],
       optionsFlag: true,
       options: [
         { id: 1, text: "I am not feeling well" },
         { id: 2, text: "I need a Doctor" },
+        { id: 3, text: "I am not feeling well" },
       ],
     };
   },
@@ -104,8 +107,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: rgba(0, 0, 0, 0.3);
+  background: #e5e5e5;
 }
 #chat-window {
   width: 60%;
@@ -119,8 +121,10 @@ export default {
   border-radius: 3%;
 }
 #body {
+  padding: 10px;
+  margin: 5px;
   height: 70%;
-  overflow-y: scroll;
+  overflow: auto;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 #body::-webkit-scrollbar {
@@ -150,6 +154,11 @@ export default {
   // margin-bottom: 5px;
   border-radius: 3%;
 }
+.v-chip {
+  min-width: 170px;
+  text-align: center;
+  // width: 100%;
+}
 
 .bot-wrap {
   display: flex;
@@ -173,7 +182,7 @@ export default {
   align-items: center;
   padding: 5px;
   margin: 5px;
-  border-radius: 3%;
+  border-radius: 10%;
   background: #f0f0f3;
   box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
@@ -189,20 +198,27 @@ export default {
 .bot {
   justify-content: flex-start;
   align-items: center;
-  background: #f0f0f3;
+  background: #9f9fff;
   max-width: 50%;
-  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
+  box-shadow: -2.17893px -2.17893px 6.5368px #9f9fff,
     2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+  color: #3737ee;
 }
 #options {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: #880e4f;
+  flex-wrap: wrap;
+  height: auto;
   height: 10%;
   padding: 10px;
+  // overflow-x: scroll;
+  // overflow-y: hidden;
 }
 #foot {
   padding: 10px;
+  margin-top: 30px;
   width: 100%;
   height: 10%;
   display: flex;
