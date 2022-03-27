@@ -39,8 +39,11 @@
       </div>
     </section>
     <!-- Features -->
-    <v-dialog v-if="dialog" class="chatpopup" v-model="dialog" width="500">
-      <chatWindow :showChatWindow="true" />
+    <v-dialog v-model="dialog">
+      <chatWindow v-if="dialog" class="chat-win" :showChatWindow="true" />
+      <v-btn class="mx-2" small fab depressed @click="close">
+        <v-icon dark> mdi-close </v-icon>
+      </v-btn>
     </v-dialog>
   </main>
 </template>
@@ -58,6 +61,10 @@ export default {
     };
   },
   methods: {
+    close() {
+      this.dialog = false;
+      console.log("Enter Dashboard", this.dialog);
+    },
     launchPopup() {
       this.dialog = true;
       console.log("launchPopup", this.dialog);
@@ -67,10 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chatpopup {
-  width: 70vw;
-  height: 70vh;
-}
 .landing-text {
   margin-bottom: 80px;
 }
@@ -130,6 +133,13 @@ main {
   text-align: center;
 }
 
+.chat-win {
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  z-index: 999;
+}
 .section-header h2 {
   font-size: 35px;
 }

@@ -11,6 +11,11 @@
           <p class="white--text ma-0 pa-0 botTitle">Dr Bot</p>
           <p class="grey--text ma-0 pa-0 botStatus">Active</p>
         </div>
+        <v-spacer></v-spacer>
+
+        <!-- <v-btn class="mx-2" small fab depressed @click="close">
+          <v-icon dark> mdi-close </v-icon>
+        </v-btn> -->
 
         <v-spacer></v-spacer>
       </v-app-bar>
@@ -57,6 +62,7 @@ export default {
   props: ["showChatWindow"],
   data() {
     return {
+      dialog: false,
       userMsg: null,
       userOption: null,
       messages: [
@@ -73,6 +79,10 @@ export default {
     };
   },
   methods: {
+    close() {
+      this.dialog = false;
+      console.log("Enter Dashboard", this.dialog);
+    },
     sendTypeMessage() {
       if (this.userMsg !== null && this.userMsg != "") {
         this.messages.push({
@@ -107,7 +117,7 @@ export default {
   justify-content: center;
   align-items: center;
 
-  background: #e5e5e5;
+  background: rgba(0, 0, 0, 0.3);
 }
 #chat-window {
   width: 60%;
@@ -115,9 +125,7 @@ export default {
   max-width: 450px;
   border-radius: 3%;
   height: 90vh;
-  background: #f0f0f3;
-  box-shadow: -2.17893px -2.17893px 6.5368px #ffffff,
-    2.17893px 2.17893px 6.5368px rgba(174, 174, 192, 0.4);
+  background: #fcfcfc;
 }
 #appbar {
   border-radius: 3%;
