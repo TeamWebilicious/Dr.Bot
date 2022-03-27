@@ -33,19 +33,21 @@
           </div>
         </div>
         <!-- Doctor Card -->
-        <!-- <div class="doctorCard">
+        <div class="doctorCard" v-if="showDoctor">
           <div class="top">
-            <div class="left">
-              <v-avatar size="40">
+            <div class="left d-flex">
+              <v-avatar size="30" color="#4285F4">
                 <v-icon color="white accent-4">1</v-icon>
               </v-avatar>
+              <div class="name ml-2 mt-1"><b>Dr. Bot</b></div>
+              <div class="ml-2 spu mt-1"><b>,MBBS</b></div>
             </div>
             <div class="right">
-              <div class="name">Dr. Bot</div>
-              <div class="status">Active</div>
+              <div class="spu">Endocrinology</div>
+              <div class="spu">4 Years of Experience</div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
 
       <div id="options" v-if="optionsFlag">
@@ -81,6 +83,7 @@ export default {
     return {
       userMsg: null,
       userOption: null,
+      showDoctor: false,
       messages: [
         { id: 1, text: "Hey!", bot: true },
         { id: 2, text: "I need an ", bot: false },
@@ -91,7 +94,6 @@ export default {
       options: [
         { id: 1, text: "I am not feeling well" },
         { id: 2, text: "I need a Doctor" },
-        { id: 3, text: "I am not feeling well" },
       ],
     };
   },
@@ -222,14 +224,16 @@ export default {
 }
 #options {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   color: #880e4f;
   flex-wrap: wrap;
   height: 10%;
-  margin: 5px 2px;
+  width: 100%;
+  margin: 2px;
   // overflow-x: scroll;
-  // overflow-y: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 #foot {
   padding: 0px 10px;
