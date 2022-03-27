@@ -33,7 +33,7 @@
           </div>
         </div>
         <!-- Doctor Card -->
-        <div class="doctorCard">
+        <!-- <div class="doctorCard">
           <div class="top">
             <div class="left">
               <v-avatar size="40">
@@ -45,7 +45,7 @@
               <div class="status">Active</div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div id="options" v-if="optionsFlag">
