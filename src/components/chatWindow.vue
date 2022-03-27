@@ -1,6 +1,6 @@
 <template>
   <section id="chat-window-wrap" v-if="showChatWindow">
-    <v-card id="chat-window" class="pa-2">
+    <v-card id="chat-window">
       <v-app-bar color="#4285F4" id="appbar" dense dark>
         <v-badge bottom color="green accent-4" dot offset-x="10" offset-y="10">
           <v-avatar size="40">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <!-- Doctor Card -->
-        <!-- <div class="doctorCard">
+        <div class="doctorCard">
           <div class="top">
             <div class="left">
               <v-avatar size="40">
@@ -45,13 +45,16 @@
               <div class="status">Active</div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
 
       <div id="options" v-if="optionsFlag">
-        <v-chip v-for="option in options" :key="option.id" class="ml-1">{{
-          option.text
-        }}</v-chip>
+        <v-chip
+          v-for="option in options"
+          :key="option.id"
+          class="ml-1 mb-1 pink lighten-4 pink--text text--darken-5"
+          >{{ option.text }}</v-chip
+        >
       </div>
       <div id="foot" class="md-1">
         <v-text-field
@@ -163,7 +166,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 5px;
+  // padding: 5px;
   // margin-bottom: 5px;
   border-radius: 3%;
 }
@@ -223,15 +226,14 @@ export default {
   align-items: center;
   color: #880e4f;
   flex-wrap: wrap;
-  height: auto;
   height: 10%;
-  padding: 10px;
+  margin: 5px 2px;
   // overflow-x: scroll;
   // overflow-y: hidden;
 }
 #foot {
-  padding: 10px;
-  margin-top: 30px;
+  padding: 0px 10px;
+  margin-top: 20px;
   width: 100%;
   height: 10%;
   display: flex;
