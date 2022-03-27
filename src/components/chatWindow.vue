@@ -50,8 +50,9 @@
         </div>
       </div>
 
-      <div id="options" v-if="optionsFlag">
+      <div id="options" v-if="optionsFlag && options.length > 0">
         <v-chip
+          @click="triggerChipClick(option.text)"
           v-for="option in options"
           :key="option.id"
           class="ml-1 mb-1 pink lighten-4 pink--text text--darken-5"
@@ -83,35 +84,67 @@ export default {
     return {
       userMsg: null,
       userOption: null,
-      showDoctor: false,
-      messages: [
-        { id: 1, text: "Hey!", bot: true },
-        { id: 2, text: "I need an ", bot: false },
-        { id: 3, text: "Hey!", bot: true },
-        { id: 4, text: "I am upset with headache", bot: false },
-      ],
+      messages: [],
       optionsFlag: true,
-      options: [
-        { id: 1, text: "I am not feeling well" },
-        { id: 2, text: "I need a Doctor" },
-      ],
+      options: [],
     };
+  },
+  created() {
+    this.userMsg = "Hai, Dr.Bot";
+    this.sendMessage();
   },
   methods: {
     async sendMessage() {
-      this.messages.push({
-        id: this.messages.length + 1,
-        text: this.userMsg,
-        bot: false,
-      });
-      await msgService.dialogflowGateway(this.userMsg).then((response) => {
-        console.log(response);
+      //waste
+      if (
+        this.userMsg == "Male" ||
+        this.userMsg == "Female" ||
+        this.userMsg == "Trance Gender"
+      ) {
         this.messages.push({
           id: this.messages.length + 1,
-          text: response.data.message,
+          text: this.userMsg,
+          bot: false,
+        });
+        this.messages.push({
+          id: this.messages.length + 1,
+          text: "please describe your issue?",
           bot: true,
         });
-      });
+        this.options = [];
+      } else {
+        this.messages.push({
+          id: this.messages.length + 1,
+          text: this.userMsg,
+          bot: false,
+        });
+        await msgService.dialogflowGateway(this.userMsg).then((response) => {
+          console.log(response);
+          this.messages.push({
+            id: this.messages.length + 1,
+            text: response.message,
+            bot: true,
+          });
+
+          this.userMsg = "";
+          this.options = response.options;
+          console.log(this.userMsg);
+          if (response.message == "can you please enter your gender") {
+            this.options = [
+              { text: "Female", id: 1 },
+              { text: "Male", id: 2 },
+              { text: "Trance Gender", id: 3 },
+            ];
+          }
+        });
+      }
+      this.userMsg = "";
+    },
+
+    async triggerChipClick(msg) {
+      this.userMsg = msg;
+      this.sendMessage();
+      this.userMsg = "";
     },
   },
 };
