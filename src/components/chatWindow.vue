@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import msgService from "./../service.js";
+
 export default {
   props: ["showChatWindow"],
   data() {
@@ -53,6 +55,24 @@ export default {
         { id: 2, text: "I need a Doctor" },
       ],
     };
+  },
+  methods: {
+    sendMessage(message) {
+      msgService.sendMessage(message);
+      this.messages
+        .push({
+          id: this.messages.length + 1,
+          text: message,
+          bot: false,
+        })
+        .then((response) => {
+          this.messages.push({
+            id: this.messages.length + 1,
+            text: response.data.message,
+            bot: true,
+          });
+        });
+    },
   },
 };
 </script>
