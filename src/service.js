@@ -5,14 +5,14 @@ import {
 } from "./firebase";
 
 export const msgService = {
-    msgBot
+    dialogflowGateway
 };
 
 
-async function msgBot(msg) {
+async function dialogflowGateway(msg) {
 
-    const createOrderCF = functions.httpsCallable('createOrder');
-    await createOrderCF({
+    const dialogflowGatewayCF = functions.httpsCallable('dialogflowGateway');
+    await dialogflowGatewayCF({
         "sessionId": msg,
         "queryInput": {
             "text": {
@@ -23,6 +23,7 @@ async function msgBot(msg) {
     })
         .then((response) => {
             console.log("Create order response", response);
+            return response
         })
         .catch((err) => {
             console.error("Create order error", err.code, err.message);

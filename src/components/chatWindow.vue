@@ -48,15 +48,10 @@
         </div> -->
       </div>
 
-      <div id="options" class="text-center" v-if="optionsFlag">
-        <v-chip
-          v-for="option in options"
-          :key="option.id"
-          min-width="70px"
-          class="ma-1 pink lighten-4 text-center pink--text text--darken-3"
-          @click="userOptionFn(option)"
-          >{{ option.text }}</v-chip
-        >
+      <div id="options" v-if="optionsFlag">
+        <v-chip v-for="option in options" :key="option.id" class="ml-1">{{
+          option.text
+        }}</v-chip>
       </div>
       <div id="foot" class="md-1">
         <v-text-field
@@ -66,7 +61,8 @@
           dense
           append-outer-icon="mdi-send"
           v-model="userMsg"
-          @keyup.enter="sendTypeMessage"
+          @keyup.enter="sendMessage"
+          @click:append-outer="sendMessage"
         ></v-text-field>
       </div>
     </v-card>
@@ -74,7 +70,7 @@
 </template>
 
 <script>
-import msgService from "./../service.js";
+import { msgService } from "./../service.js";
 
 export default {
   props: ["showChatWindow"],
@@ -97,13 +93,14 @@ export default {
     };
   },
   methods: {
-    async sendMessage(message) {
+    async sendMessage() {
       this.messages.push({
         id: this.messages.length + 1,
-        text: message,
+        text: this.userMsg,
         bot: false,
       });
-      await msgService.sendMessage(message).then((response) => {
+      await msgService.dialogflowGateway(this.userMsg).then((response) => {
+        console.log(response);
         this.messages.push({
           id: this.messages.length + 1,
           text: response.data.message,
